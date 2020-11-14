@@ -3,12 +3,12 @@ import {
     Router,
     NavigationStart,
     NavigationCancel,
-    NavigationEnd
+    NavigationEnd,
 } from "@angular/router";
 import {
     Location,
     LocationStrategy,
-    PathLocationStrategy
+    PathLocationStrategy,
 } from "@angular/common";
 import { filter } from "rxjs/operators";
 declare let $: any;
@@ -21,9 +21,9 @@ declare let $: any;
         Location,
         {
             provide: LocationStrategy,
-            useClass: PathLocationStrategy
-        }
-    ]
+            useClass: PathLocationStrategy,
+        },
+    ],
 })
 export class AppComponent implements OnInit, OnDestroy {
     location: any;
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     recallJsFuntions() {
-        this.router.events.subscribe(event => {
+        this.router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
                 $(".preloader").fadeIn("slow");
             }
@@ -44,12 +44,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.routerSubscription = this.router.events
             .pipe(
                 filter(
-                    event =>
+                    (event) =>
                         event instanceof NavigationEnd ||
                         event instanceof NavigationCancel
                 )
             )
-            .subscribe(event => {
+            .subscribe((event) => {
                 $.getScript("../assets/js/custom.js");
                 $(".preloader").fadeOut("slow");
                 this.location = this.router.url;
