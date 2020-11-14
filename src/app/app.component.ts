@@ -1,22 +1,22 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
     Router,
     NavigationStart,
     NavigationCancel,
     NavigationEnd,
-} from "@angular/router";
+} from '@angular/router';
 import {
     Location,
     LocationStrategy,
     PathLocationStrategy,
-} from "@angular/common";
-import { filter } from "rxjs/operators";
+} from '@angular/common';
+import { filter } from 'rxjs/operators';
 declare let $: any;
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.scss"],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
     providers: [
         Location,
         {
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     recallJsFuntions() {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
-                $(".preloader").fadeIn("slow");
+                $('.preloader').fadeIn('slow');
             }
         });
         this.routerSubscription = this.router.events
@@ -50,8 +50,8 @@ export class AppComponent implements OnInit, OnDestroy {
                 )
             )
             .subscribe((event) => {
-                $.getScript("../assets/js/custom.js");
-                $(".preloader").fadeOut("slow");
+                $.getScript('../assets/js/custom.js');
+                $('.preloader').fadeOut('slow');
                 this.location = this.router.url;
                 if (!(event instanceof NavigationEnd)) {
                     return;
